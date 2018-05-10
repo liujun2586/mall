@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Kotlin2JsCompilerArguments">
+    <option name="sourceMapEmbedSources" />
+    <option name="sourceMapPrefix" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/shop-parent/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-common/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-goods-api/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-goods-server/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-mgrsite/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-scheduler/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-member-api/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-member-server/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-mobile/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-order-api/pom.xml" />
+        <option value="$PROJECT_DIR$/shop-order-server/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

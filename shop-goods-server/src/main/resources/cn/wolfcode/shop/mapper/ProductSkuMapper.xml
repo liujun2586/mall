@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wolfcode.shop.mapper.ProductSkuMapper">
+    <resultMap id="BaseResultMap" type="cn.wolfcode.shop.domain.ProductSku">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="sn" jdbcType="VARCHAR" property="sn"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="product_id" property="productId"/>
+        <collection property="productSkuPropertyList" column="id"
+                    ofType="cn.wolfcode.shop.domain.ProductSkuProperty"
+                    select="cn.wolfcode.shop.mapper.ProductSkuPropertyMapper.getBySkuId"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM product_sku
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.wolfcode.shop.domain.ProductSku"
+            useGeneratedKeys="true">
+        INSERT INTO product_sku (product_id, sn, price
+        )
+        VALUES (#{productId,jdbcType=BIGINT}, #{sn,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}
+        )
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.wolfcode.shop.domain.ProductSku">
+        UPDATE product_sku
+        SET product_id = #{productId,jdbcType=BIGINT},
+            sn         = #{sn,jdbcType=VARCHAR},
+            price      = #{price,jdbcType=DECIMAL}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            id,
+            product_id,
+            sn,
+            price
+        FROM product_sku
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+            id,
+            product_id,
+            sn,
+            price
+        FROM product_sku
+    </select>
+    <select id="getByProductId" resultMap="BaseResultMap">
+        SELECT
+            id,
+            product_id,
+            sn,
+            price
+        FROM product_sku
+        WHERE product_id = #{productId}
+    </select>
+    <select id="getBySn" resultMap="BaseResultMap">
+        SELECT
+            id,
+            product_id,
+            sn,
+            price
+        FROM product_sku
+        where sn = #{sn}
+    </select>
+</mapper>

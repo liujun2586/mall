@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wolfcode.shop.mapper.PropertyMapper">
+  <resultMap id="BaseResultMap" type="cn.wolfcode.shop.domain.Property">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="catalog_id" jdbcType="BIGINT" property="catalogId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <collection property="valueList" ofType="cn.wolfcode.shop.domain.PropertyValue"
+                column="id" select="cn.wolfcode.shop.mapper.PropertyValueMapper.getByPropertyId"/>
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from property
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.wolfcode.shop.domain.Property" useGeneratedKeys="true">
+    insert into property (catalog_id, name, sort, 
+      type)
+    values (#{catalogId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
+      #{type,jdbcType=TINYINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.wolfcode.shop.domain.Property">
+    update property
+    set catalog_id = #{catalogId,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      type = #{type,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select id, catalog_id, name, sort, type
+    from property
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, catalog_id, name, sort, type
+    from property
+  </select>
+    <select id="getByCatalogId" resultMap="BaseResultMap">
+      select id, catalog_id, name, sort, type
+      from property
+      where catalog_id = #{catalogId}
+    </select>
+</mapper>

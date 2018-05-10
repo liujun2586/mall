@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wolfcode.shop.mapper.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="cn.wolfcode.shop.domain.UserInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
+        <result column="real_name" jdbcType="VARCHAR" property="realName"/>
+        <result column="head_img" jdbcType="VARCHAR" property="headImg"/>
+        <result column="id_number" jdbcType="VARCHAR" property="idNumber"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="sex" jdbcType="BIT" property="sex"/>
+        <result column="birthday" jdbcType="DATE" property="birthday"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="regist_time" jdbcType="TIMESTAMP" property="registTime"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        DELETE FROM user_info
+        WHERE id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.wolfcode.shop.domain.UserInfo"
+            useGeneratedKeys="true">
+        INSERT INTO user_info (id, nick_name, real_name, head_img,
+                               id_number, phone, email,
+                               sex, birthday, province, city,
+                               district, regist_time)
+        VALUES (#{id}, #{nickName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{headImg,jdbcType=VARCHAR},
+                       #{idNumber,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+                       #{email,jdbcType=VARCHAR},
+                       #{sex,jdbcType=BIT}, #{birthday,jdbcType=DATE},
+                       #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+                #{district,jdbcType=VARCHAR}, #{registTime,jdbcType=TIMESTAMP})
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="cn.wolfcode.shop.domain.UserInfo">
+        UPDATE user_info
+        SET nick_name   = #{nickName,jdbcType=VARCHAR},
+            real_name   = #{realName,jdbcType=VARCHAR},
+            head_img    = #{headImg,jdbcType=VARCHAR},
+            id_number   = #{idNumber,jdbcType=VARCHAR},
+            phone       = #{phone,jdbcType=VARCHAR},
+            email       = #{email,jdbcType=VARCHAR},
+            sex         = #{sex,jdbcType=BIT},
+            birthday    = #{birthday,jdbcType=DATE},
+            province    = #{province,jdbcType=VARCHAR},
+            city        = #{city,jdbcType=VARCHAR},
+            district    = #{district,jdbcType=VARCHAR},
+            regist_time = #{registTime,jdbcType=TIMESTAMP}
+        WHERE id = #{id,jdbcType=BIGINT}
+    </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+            id,
+            nick_name,
+            real_name,
+            head_img,
+            id_number,
+            phone,
+            email,
+            sex,
+            birthday,
+            province,
+            city,
+            district,
+            regist_time
+        FROM user_info
+        WHERE id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        SELECT
+            id,
+            nick_name,
+            real_name,
+            head_img,
+            id_number,
+            phone,
+            email,
+            sex,
+            birthday,
+            province,
+            city,
+            district,
+            regist_time
+        FROM user_info
+    </select>
+    <select id="getByPhone" resultMap="BaseResultMap">
+        SELECT
+            id,
+            phone
+        FROM user_info
+        WHERE phone = #{phone}
+    </select>
+</mapper>
